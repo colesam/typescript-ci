@@ -1,4 +1,5 @@
-import * as process from "process";
+/* eslint-disable @typescript-eslint/no-var-requires */
+const process = require("process");
 
 module.exports = {
   type: "postgres",
