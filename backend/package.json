@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "start:watch": "nodemon"
+    "start:watch": "nodemon",
+    "migrate:up": "ts-node ./node_modules/.bin/typeorm migration:run",
+    "migrate:down": "ts-node ./node_modules/.bin/typeorm migration:revert"
   },
   "keywords": [],
   "author": "",

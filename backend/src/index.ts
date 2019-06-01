@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import * as bodyParser from "body-parser";
 import { createConnection } from "typeorm";
 import { User } from "./entity/User";
+import { register } from "./controllers/UserController";
 
 const PORT = process.env.PORT || 8080;
 
@@ -13,6 +14,7 @@ createConnection().then(connection => {
   // create and setup express app
   const app = express();
   app.use(bodyParser.json());
+  app.use(express.json());
 
   // register routes
   app.get("/", (_req: Request, res: Response) => res.send("Hello world!"));
@@ -25,9 +27,9 @@ createConnection().then(connection => {
     return userRepository.findOne(req.params.id);
   });
 
-  app.post("/users", async function(req: Request, _res: Response) {
-    const user = userRepository.create(req.body);
-    return userRepository.save(user);
+  app.post("/users", async function(req: Request, res: Response) {
+    console.log("received POST request");
+    register(req, res, userRepository);
   });
 
   app.put("/users/:id", async function(req: Request, _res: Response) {
